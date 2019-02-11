@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: C.M.Sayedur Rahman
-	      cmsayed@gmail.com
+	      sayed@sslwireless.com
 Tags: Payment Gateway, SSLCommerz, IPN, Raw PHP
 Requires : PHP 5.6 and Mysql
 License: GPLv2 or later
