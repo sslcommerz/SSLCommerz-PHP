@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('PROJECT_PATH')) {
-    define('PROJECT_PATH', 'http://localhost/projects/oop-sslcommerz');
+    define('PROJECT_PATH', 'http://localhost/project-path'); // Replace this value with your project path
 }
 
 if (!defined('API_DOMAIN_URL')) {
