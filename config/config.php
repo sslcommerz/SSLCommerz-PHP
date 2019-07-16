@@ -9,11 +9,11 @@ if (!defined('API_DOMAIN_URL')) {
 }
 
 if (!defined('STORE_ID')) {
-    define('STORE_ID', 'innov5d1b22b0a4d64');
+    define('STORE_ID', 'testbox');
 }
 
 if (!defined('STORE_PASSWORD')) {
-    define('STORE_PASSWORD', 'innov5d1b22b0a4d64@ssl');
+    define('STORE_PASSWORD', 'qwerty');
 }
 
 if (!defined('IS_LOCALHOST')) {
