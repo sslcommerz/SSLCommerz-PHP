@@ -3,8 +3,8 @@
 <h1>SSLCOMMERZ Integration Success Page</h1>
 
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(0);
+ini_set('display_errors', 0);
 
 session_start();
 
@@ -77,7 +77,7 @@ if ($row['status'] == 'Pending') {
     }
     unset($_SESSION['payment_values']);
 } else if ($row['status'] == 'Success') {
-    echo "These order is already Successful";
+    echo "This order is already Successful";
 } else {
     echo "Invalid Information";
 }

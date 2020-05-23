@@ -135,8 +135,6 @@ $post_data["shipToCountry"] = "Bangladesh";
 $post_data["shipToEmail"] = "john.doe@email.com";
 $post_data["ship_to_phone_number"] = "01711111111";
 
-$post_data["ipn_url"] = "https://developer.sslcommerz.com/doc/v4/";
-
 # SPECIAL PARAM
 $post_data['tokenize_id'] = "1";
 
