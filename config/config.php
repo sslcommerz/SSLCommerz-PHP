@@ -38,4 +38,5 @@ return [
     'success_url' => 'pg_redirection/success.php',
     'failed_url' => 'pg_redirection/fail.php',
     'cancel_url' => 'pg_redirection/cancel.php',
+    'ipn_url' => 'pg_redirection/ipn.php',
 ];

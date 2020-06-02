@@ -12,6 +12,8 @@ class SslCommerzNotification extends AbstractSslCommerz
     private $successUrl;
     private $cancelUrl;
     private $failedUrl;
+    private $ipnUrl;
+
     /**
      * @var string
      */
@@ -268,6 +270,16 @@ class SslCommerzNotification extends AbstractSslCommerz
         return $this->cancelUrl;
     }
 
+    protected function setIpnUrl()
+    {
+        $this->ipnUrl = $this->config['projectPath'] . '/' . $this->config['ipn_url'];
+    }
+
+    protected function getIpnUrl()
+    {
+        return $this->ipnUrl;
+    }
+
     public function setParams($requestData)
     {
         ##  Integration Required Parameters
@@ -301,10 +313,11 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->data['tran_id'] = $info['tran_id']; // string (30)	Mandatory - Unique transaction ID to identify your order in both your end and SSLCommerz
         $this->data['product_category'] = $info['product_category']; // string (50)	Mandatory - Mention the product category. It is a open field. Example - clothing,shoes,watches,gift,healthcare, jewellery,top up,toys,baby care,pants,laptop,donation,etc
 
-        // Set the SUCCESS, FAIL, CANCEL Redirect URL before setting the other parameters
+        // Set the SUCCESS, FAIL, CANCEL and IPN URL before setting the other parameters
         $this->setSuccessUrl();
         $this->setFailedUrl();
         $this->setCancelUrl();
+        $this->setIpnUrl();
 
         $this->data['success_url'] = $this->getSuccessUrl(); // string (255)	Mandatory - It is the callback URL of your website where user will redirect after successful payment (Length: 255)
         $this->data['fail_url'] = $this->getFailedUrl(); // string (255)	Mandatory - It is the callback URL of your website where user will redirect after any failure occure during payment (Length: 255)
@@ -318,7 +331,7 @@ class SslCommerzNotification extends AbstractSslCommerz
          * Important! Not mandatory, however better to use to avoid missing any payment notification - It is the Instant Payment Notification (IPN) URL of your website where SSLCOMMERZ will send the transaction's status (Length: 255).
          * The data will be communicated as SSLCOMMERZ Server to your Server. So, customer session will not work.
          * */
-        $this->data['ipn_url'] = (isset($info['ipn_url'])) ? $info['ipn_url'] : null;
+        $this->data['ipn_url'] = $this->getIpnUrl();
 
         /*
          * Type: string (30)
