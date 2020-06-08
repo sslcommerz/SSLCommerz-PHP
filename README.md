@@ -1,7 +1,6 @@
 ### SSLCommerz Payment Gateway Integration - PHP Library
 
 
-
 ### Library Directory
 
 ```
@@ -81,3 +80,11 @@
 
 
 * __Step 7:__ For redirecting action from SSLCommerz Payment gateway, we have also provided sample `success.php`, `cancel.php`, `fail.php` and `ipn.php` files. You can update those files according to your need.
+
+### Contributors
+
+>Prabal Mallick
+
+> Md. Rakibul Islam
+
+> integration@sslcommerz.com
