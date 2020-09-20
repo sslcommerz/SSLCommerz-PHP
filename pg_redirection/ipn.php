@@ -1,5 +1,8 @@
 <?php
-session_start();
+######
+# THIS FILE IS ONLY AN EXAMPLE. PLEASE MODIFY AS REQUIRED.
+# Contributor: Md. Rakibul Islam <rakibul.islam@sslwireless.com>
+######
 
 error_reporting(0);
 
@@ -51,7 +54,7 @@ switch ($status) {
             if ($validation == true) {
 
                 $query = new OrderTransaction();
-                $sql   = $query->updateTransactionQuery($tran_id, 'Success');
+                $sql   = $query->updateTransactionQuery($tran_id, 'Processing');
 
                 if ($conn_integration->query($sql) === true) {
                     echo "Payment Record Updated Successfully";
@@ -68,9 +71,7 @@ switch ($status) {
 
             }
 
-            unset($_SESSION['payment_values']);
-
-        } else if ($row['status'] == 'Success') {
+        } else if ($row['status'] == 'Processing') {
 
             echo "This order is already Successful";
 

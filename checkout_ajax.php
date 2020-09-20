@@ -12,7 +12,7 @@ $requestData = (array) json_decode($_POST['cart_json']);
 
 $post_data['total_amount'] = $requestData['amount'];
 $post_data['currency'] = "BDT";
-$post_data['tran_id'] = "TYISHL-SSLCZ_TEST_" . uniqid();
+$post_data['tran_id'] = "SSLCZ_TEST_" . uniqid();
 //
 //# CUSTOMER INFORMATION
 $post_data['cus_name'] = isset($requestData['cus_name']) ? $requestData['cus_name'] : "John Doe";
