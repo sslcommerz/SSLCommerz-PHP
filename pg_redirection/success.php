@@ -24,8 +24,8 @@ ini_set('display_errors', 0);
 
                 <?php
                 require_once(__DIR__ . "/../lib/SslCommerzNotification.php");
-                include(__DIR__ . "/../db_connection.php");
-                include(__DIR__ . "/../OrderTransaction.php");
+                include_once(__DIR__ . "/../db_connection.php");
+                include_once(__DIR__ . "/../OrderTransaction.php");
 
                 use SslCommerz\SslCommerzNotification;
 
@@ -86,7 +86,7 @@ ini_set('display_errors', 0);
 
                     } else { // $validated is false
 
-                        $ot->updateTransactionQuery($tran_id, 'Failed');
+                        $conn_integration->query($ot->updateTransactionQuery($tran_id, 'Failed'));
                         echo '<h2 class="text-center text-danger">Payment was not valid. Please contact with the merchant.</h2>';
 
                     } // check if validated or not
