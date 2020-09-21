@@ -16,7 +16,7 @@ $post_data = array();
 
 $post_data['total_amount'] = $_POST['amount'];
 $post_data['currency'] = "BDT";
-$post_data['tran_id'] = "TYISHL-SSLCZ_TEST_" . uniqid();
+$post_data['tran_id'] = "SSLCZ_TEST_" . uniqid();
 
 # CUSTOMER INFORMATION
 $post_data['cus_name'] = isset($_POST['customer_name']) ? $_POST['customer_name'] : "John Doe";
@@ -41,10 +41,10 @@ $post_data['ship_phone'] = "";
 $post_data['ship_country'] = "Bangladesh";
 
 # OPTIONAL PARAMETERS
-$post_data['value_a'] = "Regent Air";
-$post_data['value_b'] = "ref002";
-$post_data['value_c'] = "ref003";
-$post_data['value_d'] = "ref004";
+// $post_data['value_a'] = "Regent Air";
+// $post_data['value_b'] = "ref002";
+// $post_data['value_c'] = "ref003";
+// $post_data['value_d'] = "ref004";
 
 # MANAGED TRANS
 //$post_data['multi_card_name'] = "brac_visa,dbbl_visa,city_visa,ebl_visa,brac_master,dbbl_master,city_master,ebl_master,city_amex,qcash,dbbl_nexus,bankasia,abbank,ibbl,mtbl,city";

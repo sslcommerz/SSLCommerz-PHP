@@ -1,11 +1,14 @@
 <?php
-session_start();
+######
+# THIS FILE IS ONLY AN EXAMPLE. PLEASE MODIFY AS REQUIRED.
+# Contributor: Md. Rakibul Islam <rakibul.islam@sslwireless.com>
+######
 
 error_reporting(0);
 
 require_once __DIR__ . "/../lib/SslCommerzNotification.php";
-include __DIR__ . "/../db_connection.php";
-include __DIR__ . "/../OrderTransaction.php";
+include_once __DIR__ . "/../db_connection.php";
+include_once __DIR__ . "/../OrderTransaction.php";
 
 use SslCommerz\SslCommerzNotification;
 
@@ -18,17 +21,15 @@ $tran_id = $_POST['tran_id'];
 $status  = $_POST['status'];
 
 $sslc  = new SslCommerzNotification();
-$query = new OrderTransaction();
+$ot = new OrderTransaction();
 
-$sql    = $query->getRecordQuery($tran_id);
+$sql    = $ot->getRecordQuery($tran_id);
 $result = $conn_integration->query($sql);
 $row    = $result->fetch_array(MYSQLI_ASSOC);
 
 if (empty($row)) {
-
     echo "Invalid Transaction ID.";
     exit;
-
 }
 
 switch ($status) {
@@ -50,8 +51,7 @@ switch ($status) {
 
             if ($validation == true) {
 
-                $query = new OrderTransaction();
-                $sql   = $query->updateTransactionQuery($tran_id, 'Success');
+                $sql   = $ot->updateTransactionQuery($tran_id, 'Processing');
 
                 if ($conn_integration->query($sql) === true) {
                     echo "Payment Record Updated Successfully";
@@ -61,16 +61,13 @@ switch ($status) {
 
             } else {
 
-                $query = new OrderTransaction();
-                $sql   = $query->updateTransactionQuery($tran_id, 'Failed');
-
+                $sql = $ot->updateTransactionQuery($tran_id, 'Failed');
+                $conn_integration->query($sql);
                 echo "Payment was not valid";
 
             }
 
-            unset($_SESSION['payment_values']);
-
-        } else if ($row['status'] == 'Success') {
+        } else if ($row['status'] == 'Processing') {
 
             echo "This order is already Successful";
 
@@ -80,8 +77,8 @@ switch ($status) {
 
     case 'FAILED':
 
-        $query = new OrderTransaction();
-        $sql   = $query->updateTransactionQuery($tran_id, 'Failed');
+        $sql = $ot->updateTransactionQuery($tran_id, 'Failed');
+        $conn_integration->query($sql);
 
         echo "Payment was failed";
 
@@ -89,8 +86,8 @@ switch ($status) {
 
     case 'CANCELLED':
 
-        $query = new OrderTransaction();
-        $sql   = $query->updateTransactionQuery($tran_id, 'Cancelled');
+        $sql = $ot->updateTransactionQuery($tran_id, 'Cancelled');
+        $conn_integration->query($sql);
 
         echo "Payment was Cancelled";
 

@@ -7,6 +7,7 @@ class OrderTransaction {
         $sql = "select * from orders WHERE transaction_id='" . $tran_id . "'";
         return $sql;
     }
+
     public function saveTransactionQuery($post_data)
     {
         $name = $post_data['cus_name'];
