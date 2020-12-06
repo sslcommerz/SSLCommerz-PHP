@@ -195,15 +195,6 @@
 
 <!-- If you want to use the popup integration, -->
 <script>
-    var obj = {};
-    obj.cus_name = $('#customer_name').val();
-    obj.cus_phone = $('#mobile').val();
-    obj.cus_email = $('#email').val();
-    obj.cus_addr1 = $('#address').val();
-    obj.amount = $('#total_amount').val();
-
-    $('#sslczPayBtn').prop('postdata', obj);
-
     (function (window, document) {
         var loader = function () {
             var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
@@ -214,5 +205,16 @@
 
         window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
     })(window, document);
+
+    let setprop = function() {
+        var obj = {};
+        obj.cus_name = $('#customer_name').val();
+        obj.cus_phone = $('#mobile').val();
+        obj.cus_email = $('#email').val();
+        obj.cus_addr1 = $('#address').val();
+        obj.amount = $('#total_amount').val();
+        $('#sslczPayBtn').prop('postdata', obj);
+    };
+    $('input').on('keyup', setprop);
 </script>
 </html>
