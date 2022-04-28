@@ -5,7 +5,8 @@ if (!defined('PROJECT_PATH')) {
 }
 
 if (!defined('API_DOMAIN_URL')) {
-    define('API_DOMAIN_URL', 'https://sandbox.sslcommerz.com');
+    define('API_DOMAIN_URL', 'https://sandbox.sslcommerz.com'); // Sandbox API URL
+    // define('API_DOMAIN_URL', 'https://securepay.sslcommerz.com'); // Live API URL
 }
 
 if (!defined('STORE_ID')) {
