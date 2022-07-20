@@ -86,7 +86,6 @@ ini_set('display_errors', 0);
 
                     } else { // $validated is false
 
-                        $conn_integration->query($ot->updateTransactionQuery($tran_id, 'Failed'));
                         echo '<h2 class="text-center text-danger">Payment was not valid. Please contact with the merchant.</h2>';
 
                     } // check if validated or not
