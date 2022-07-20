@@ -1,7 +1,8 @@
 <?php
+
 namespace SslCommerz;
 
-require_once(__DIR__."/AbstractSslCommerz.php");
+require_once(__DIR__ . "/AbstractSslCommerz.php");
 
 
 class SslCommerzNotification extends AbstractSslCommerz
@@ -24,7 +25,7 @@ class SslCommerzNotification extends AbstractSslCommerz
      */
     public function __construct()
     {
-        $this->config = include(__DIR__.'/../config/config.php');
+        $this->config = include(__DIR__ . '/../config/config.php');
 
         $this->setStoreId($this->config['apiCredentials']['store_id']);
         $this->setStorePassword($this->config['apiCredentials']['store_password']);
@@ -58,7 +59,7 @@ class SslCommerzNotification extends AbstractSslCommerz
             $post_data['store_id'] = $this->getStoreId();
             $post_data['store_pass'] = $this->getStorePassword();
 
-            if ($this->SSLCOMMERZ_hash_varify($this->getStorePassword(), $post_data)) {
+            if ($this->SSLCOMMERZ_hash_verify($this->getStorePassword(), $post_data)) {
 
                 $val_id = urlencode($post_data['val_id']);
                 $store_id = urlencode($this->getStoreId());
@@ -159,8 +160,11 @@ class SslCommerzNotification extends AbstractSslCommerz
     }
 
     # FUNCTION TO CHECK HASH VALUE
-    protected function SSLCOMMERZ_hash_varify($store_passwd = "", $post_data)
+    protected function SSLCOMMERZ_hash_verify($store_passwd = "", $post_data)
     {
+        if (!$this->config['verify_hash']) {
+            return true;
+        }
 
         if (isset($post_data) && isset($post_data['verify_sign']) && isset($post_data['verify_key'])) {
             # NEW ARRAY DECLARED TO TAKE VALUE OF ALL POST
@@ -189,7 +193,6 @@ class SslCommerzNotification extends AbstractSslCommerz
             if (md5($hash_string) == $post_data['verify_sign']) {
 
                 return true;
-
             } else {
                 $this->error = "Verification signature not matched";
                 return false;

@@ -1,43 +1,38 @@
 <?php
 
 if (!defined('PROJECT_PATH')) {
-    define('PROJECT_PATH', 'http://localhost/project-path'); // Replace this value with your project path
+    define('PROJECT_PATH', 'http://localhost/project-path'); // replace this value with your project path
 }
 
-if (!defined('API_DOMAIN_URL')) {
-    define('API_DOMAIN_URL', 'https://sandbox.sslcommerz.com'); // Sandbox API URL
-    // define('API_DOMAIN_URL', 'https://securepay.sslcommerz.com'); // Live API URL
+if (!defined('IS_SANDBOX')) {
+    define('IS_SANDBOX', true); // 'true' for sandbox, 'false' for live
 }
 
 if (!defined('STORE_ID')) {
-    define('STORE_ID', 'testbox');
+    define('STORE_ID', ''); // your store id. For sandbox, register at https://developer.sslcommerz.com/registration/
 }
 
 if (!defined('STORE_PASSWORD')) {
-    define('STORE_PASSWORD', 'qwerty');
-}
-
-if (!defined('IS_LOCALHOST')) {
-    define('IS_LOCALHOST', true);
+    define('STORE_PASSWORD', ''); // your store password.
 }
 
 return [
-    'projectPath' => constant("PROJECT_PATH"),
-    'apiDomain' => constant("API_DOMAIN_URL"),
+    'success_url' => 'pg_redirection/success.php', // your success url
+    'failed_url' => 'pg_redirection/fail.php', // your fail url
+    'cancel_url' => 'pg_redirection/cancel.php', //your cancel url
+    'ipn_url' => 'pg_redirection/ipn.php', // your ipn url
+
+
+    'projectPath' => PROJECT_PATH,
+    'apiDomain' => IS_SANDBOX ? 'https://sandbox.sslcommerz.com' : 'https://securepay.sslcommerz.com',
     'apiCredentials' => [
-        'store_id' => constant("STORE_ID"),
-        'store_password' => constant("STORE_PASSWORD"),
+        'store_id' => STORE_ID,
+        'store_password' => STORE_PASSWORD,
     ],
     'apiUrl' => [
         'make_payment' => "/gwprocess/v4/api.php",
-        'transaction_status' => "/validator/api/merchantTransIDvalidationAPI.php",
         'order_validate' => "/validator/api/validationserverAPI.php",
-        'refund_payment' => "/validator/api/merchantTransIDvalidationAPI.php",
-        'refund_status' => "/validator/api/merchantTransIDvalidationAPI.php",
     ],
-    'connect_from_localhost' => constant("IS_LOCALHOST"),
-    'success_url' => 'pg_redirection/success.php',
-    'failed_url' => 'pg_redirection/fail.php',
-    'cancel_url' => 'pg_redirection/cancel.php',
-    'ipn_url' => 'pg_redirection/ipn.php',
+    'connect_from_localhost' => false,
+    'verify_hash' => true,
 ];
