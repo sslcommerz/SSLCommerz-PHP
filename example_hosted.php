@@ -32,7 +32,7 @@
 <div class="container">
     <div class="py-5 text-center">
         <h2>Hosted Payment - SSLCommerz</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. We have provided this sample form for understanding Hosted Checkout Payment with SSLCommerz.</p>
+        <p class="lead">This is a dummy checkout page, and NOT meant for production use.</p>
     </div>
 
     <div class="row">
@@ -125,7 +125,7 @@
                         <label for="country">Country</label>
                         <select class="custom-select d-block w-100" id="country" required>
                             <option value="">Choose...</option>
-                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="Bangladesh" selected>Bangladesh</option>
                         </select>
                         <div class="invalid-feedback">
                             Please select a valid country.
@@ -135,7 +135,7 @@
                         <label for="state">State</label>
                         <select class="custom-select d-block w-100" id="state" required>
                             <option value="">Choose...</option>
-                            <option value="Dhaka">Dhaka</option>
+                            <option value="Dhaka" selected>Dhaka</option>
                         </select>
                         <div class="invalid-feedback">
                             Please provide a valid state.
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required>
+                        <input type="text" class="form-control" id="zip" placeholder="" value="1000" required>
                         <div class="invalid-feedback">
                             Zip code required.
                         </div>
