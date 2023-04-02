@@ -97,7 +97,12 @@ abstract class AbstractSslCommerz implements SslCommerzInterface
                 // this is important to show the popup, return or echo to send json response back
                 $response = json_encode(['status' => 'success', 'data' => $sslcz['GatewayPageURL'], 'logo' => $sslcz['storeLogo']]);
             } else {
-                $response = json_encode(['status' => 'fail', 'data' => null, 'message' => "JSON Data parsing error!"]);
+                if (strpos($sslcz['failedreason'],'Store Credential') === false) {
+                    $message = $sslcz['failedreason'];
+                } else {
+                    $message = "Check the IS_SANDBOX, STORE_ID and STORE_PASSWORD value in config.php; DO NOT USE MERCHANT PANEL PASSWORD HERE.";
+                }
+                $response = json_encode(['status' => 'fail', 'data' => null, 'message' => $message]);
             }
 
             if ($pattern == 'json') {
