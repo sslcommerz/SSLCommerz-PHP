@@ -40,7 +40,7 @@ ini_set('display_errors', 0);
                 $row = $result->fetch_array(MYSQLI_ASSOC);
 
                 if ($row['status'] == 'Pending' || $row['status'] == 'Processing') {
-                    $validated = $sslc->orderValidate($tran_id, $amount, $currency, $_POST);
+                    $validated = $sslc->orderValidate($_POST, $tran_id, $amount, $currency);
 
                     if ($validated) {
                         $sql = $ot->updateTransactionQuery($tran_id, 'Processing');

@@ -31,7 +31,7 @@ class SslCommerzNotification extends AbstractSslCommerz
         $this->setStorePassword($this->config['apiCredentials']['store_password']);
     }
 
-    public function orderValidate($trx_id = '', $amount = 0, $currency = "BDT", $post_data)
+    public function orderValidate($post_data, $trx_id = '', $amount = 0, $currency = "BDT")
     {
         if ($post_data == '' && $trx_id == '' && !is_array($post_data)) {
             $this->error = "Please provide valid transaction ID and post request data";
@@ -59,7 +59,7 @@ class SslCommerzNotification extends AbstractSslCommerz
             $post_data['store_id'] = $this->getStoreId();
             $post_data['store_pass'] = $this->getStorePassword();
 
-            if ($this->SSLCOMMERZ_hash_verify($this->getStorePassword(), $post_data)) {
+            if ($this->SSLCOMMERZ_hash_verify($post_data, $this->getStorePassword())) {
 
                 $val_id = urlencode($post_data['val_id']);
                 $store_id = urlencode($this->getStoreId());
@@ -71,11 +71,11 @@ class SslCommerzNotification extends AbstractSslCommerz
                 curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 
                 if ($this->config['connect_from_localhost']) {
-                    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false);
-                    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+                    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 0);
+                    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 0);
                 } else {
-                    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, true);
-                    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, true);
+                    curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, 2);
+                    curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, 1);
                 }
 
 
@@ -160,7 +160,7 @@ class SslCommerzNotification extends AbstractSslCommerz
     }
 
     # FUNCTION TO CHECK HASH VALUE
-    protected function SSLCOMMERZ_hash_verify($store_passwd = "", $post_data)
+    protected function SSLCOMMERZ_hash_verify($post_data, $store_passwd = "")
     {
         if (!$this->config['verify_hash']) {
             return true;
@@ -231,7 +231,7 @@ class SslCommerzNotification extends AbstractSslCommerz
         $formattedResponse = $this->formatResponse($response, $type, $pattern); // Here we will define the response pattern
 
         if ($type == 'hosted') {
-            if (isset($formattedResponse['GatewayPageURL']) && $formattedResponse['GatewayPageURL'] != '') {
+            if (!empty($formattedResponse['GatewayPageURL'])) {
                 $this->redirect($formattedResponse['GatewayPageURL']);
             } else {
                 return $formattedResponse['failedreason'];

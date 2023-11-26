@@ -47,7 +47,7 @@ switch ($status) {
 
             }
 
-            $validation = $sslc->orderValidate($tran_id, $amount, $currency, $_POST);
+            $validation = $sslc->orderValidate($_POST, $tran_id, $amount, $currency);
 
             if ($validation == true) {
 

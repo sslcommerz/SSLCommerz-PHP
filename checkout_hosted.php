@@ -143,8 +143,11 @@ $sql = $query->saveTransactionQuery($post_data);
 if ($conn_integration->query($sql) === TRUE) {
 
     # Call the Payment Gateway Library
-    $sslcomz = new SslCommerzNotification();
-    $sslcomz->makePayment($post_data, 'hosted');
+    $sslcz = new SslCommerzNotification();
+    $msg = $sslcz->makePayment($post_data, 'hosted');
+    if (!is_array($msg)) {
+        echo $msg;
+    }
 } else {
     echo "Error: " . $sql . "<br>" . $conn_integration->error;
 }
