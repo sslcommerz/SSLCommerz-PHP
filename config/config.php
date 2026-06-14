@@ -34,5 +34,5 @@ return [
         'order_validate' => "/validator/api/validationserverAPI.php",
     ],
     'connect_from_localhost' => false,
-    'verify_hash' => true,
+    'verify_hash' => false,
 ];
